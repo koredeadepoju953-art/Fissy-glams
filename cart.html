@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cart and checkout | Tissy Glams Studio</title>
+<meta name="description" content="Review your order and choose pickup or delivery.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600;6..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="cart">
+<div id="site-header"></div>
+<main>
+<div class="page-hero"><div class="wrap"><h1>Cart and checkout</h1></div></div>
+<section><div class="wrap">
+<div id="checkout">
+  <div id="empty" hidden><p class="lead" style="margin-top:0">Your cart is empty.</p><div class="btn-row"><a class="btn" href="shop.html">Go to the shop</a></div></div>
+  <div class="checkout" id="cart-area" hidden>
+    <div><h2 style="font-size:1.6rem">Your items</h2><div id="cart-list"></div></div>
+    <form id="order-form" class="form-card summary" novalidate>
+      <fieldset><legend class="legend">How do you want to get it?</legend><div class="opts">
+        <label class="opt"><input type="radio" name="mode" value="pickup" checked><span>Pickup<small>Free, from the studio</small></span></label>
+        <label class="opt"><input type="radio" name="mode" value="delivery"><span>Delivery<small>Fee depends on your area</small></span></label></div></fieldset>
+      <p class="hint" id="pickup-note" style="margin-top:10px"></p>
+      <div id="delivery-fields" hidden style="margin-top:14px">
+        <div class="field"><label for="zone">Delivery area</label><select id="zone"></select></div>
+        <div class="field" style="margin-top:14px"><label for="address">Delivery address</label><textarea id="address" style="min-height:72px"></textarea><p class="err-msg">Enter your delivery address.</p></div></div>
+      <div class="field" style="margin-top:14px"><label for="oname">Your name</label><input id="oname" type="text" autocomplete="name" required><p class="err-msg">Enter your name.</p></div>
+      <div class="field" style="margin-top:14px"><label for="ophone">Phone number</label><input id="ophone" type="tel" autocomplete="tel" required><p class="err-msg">Enter a valid phone number.</p></div>
+      <div class="field" style="margin-top:14px"><label for="pay">Payment</label><select id="pay"><option>Bank transfer</option><option>Pay on pickup or delivery</option></select></div>
+      <div class="bank" id="bank"></div>
+      <div class="field" style="margin-top:14px"><label for="onote">Note (optional)</label><input id="onote" type="text"></div>
+      <div id="sum" style="margin-top:18px"></div>
+      <div class="btn-row"><button class="btn wa" type="submit" style="width:100%">Send order on WhatsApp</button></div>
+    </form>
+  </div>
+</div>
+<div id="order-result"></div>
+</div></section>
+</main>
+<div id="site-footer"></div>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
