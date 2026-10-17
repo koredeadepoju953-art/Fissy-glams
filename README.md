@@ -1,6 +1,6 @@
-# Tissy Glams Studio
+# Fissy Glam Studio
 
-A multi-page website for Tissy Glams Studio, a makeup, gele and beauty products studio in Abeokuta, Nigeria.
+A multi-page website for Fissy Glam Studio, a makeup, gele and beauty products studio in Abeokuta, Nigeria.
 
 ## Features
 - Book makeup and gele sessions, with an estimated total and deposit

@@ -1,4 +1,4 @@
-/* Tissy Glams Studio - shared behaviour. Content lives in data.js */
+/* Fissy Glam Studio - shared behaviour. Content lives in data.js */
 (function () {
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -28,8 +28,8 @@
   : `<div class="thumb" style="background:${p.bg}">${art(p.shape, p.color)}</div>`;
 
   /* ---------- cart ---------- */
-  const CK = 'tg_cart';
-  const getCart = () => { try { return JSON.parse(localStorage.getItem(CK)) || []; } catch { return []; } };
+  const CK = 'fg_cart';
+  const getCart = () => { try { return JSON.parse(localStorage.getItem(CK) || localStorage.getItem('tg_cart')) || []; } catch { return []; } };
   const setCart = c => { try { localStorage.setItem(CK, JSON.stringify(c)); } catch {} updateBadge(); };
   const cartCount = () => getCart().reduce((n, l) => n + l.qty, 0);
   function updateBadge() { const b = $('.cart-link b'); if (b) { b.textContent = cartCount(); b.dataset.n = cartCount(); } }
@@ -50,7 +50,7 @@
   const links = [['index.html', 'home', 'Home'], ['services.html', 'services', 'Services'], ['shop.html', 'shop', 'Shop'], ['training.html', 'training', 'Training'], ['contact.html', 'contact', 'Contact']];
   $('#site-header').outerHTML = `
   <header class="site-header"><div class="wrap bar">
-    <a class="logo" href="index.html">Tissy <span>Glams</span> Studio</a>
+    <a class="logo" href="index.html">Fissy <span>Glam</span> Studio</a>
     <nav class="nav" id="nav" aria-label="Main">${links.map(l => `<a href="${l[0]}" ${page === l[1] ? 'aria-current="page"' : ''}>${l[2]}</a>`).join('')}<a class="nav-book" href="book.html">Book a session</a></nav>
     <div class="bar-actions">
       <a class="cart-link" href="cart.html" aria-label="Cart">Cart <b data-n="0">0</b></a>
@@ -60,12 +60,12 @@
   $('#site-footer').outerHTML = `
   <footer class="site-footer"><div class="wrap">
     <div class="foot-grid">
-      <div><a class="logo" href="index.html">Tissy Glams Studio</a><p style="margin-top:12px">Makeup, gele, training and beauty products. Bookings and orders go straight to Tissy on WhatsApp.</p></div>
+      <div><a class="logo" href="index.html">Fissy Glam Studio</a><p style="margin-top:12px">Makeup, gele, training and beauty products. Bookings and orders go straight to Fissy on WhatsApp.</p></div>
       <div><h3>Explore</h3>${links.map(l => `<a href="${l[0]}">${l[2]}</a>`).join('')}<a href="book.html">Book a session</a><a href="cart.html">Cart and checkout</a></div>
-      <div><h3>Reach us</h3><a href="${waLink('Hello Tissy Glams Studio')}" target="_blank" rel="noopener">WhatsApp ${esc(SITE.phoneDisplay)}</a><a href="https://instagram.com/${SITE.instagram}" target="_blank" rel="noopener">Instagram @${esc(SITE.instagram)}</a><p style="margin-top:8px">${esc(SITE.address)}<br>${esc(SITE.hours)}</p></div>
+      <div><h3>Reach us</h3><a href="${waLink('Hello Fissy Glam Studio')}" target="_blank" rel="noopener">WhatsApp ${esc(SITE.phoneDisplay)}</a><a href="https://instagram.com/${SITE.instagram}" target="_blank" rel="noopener">Instagram @${esc(SITE.instagram)}</a><p style="margin-top:8px">${esc(SITE.address)}<br>${esc(SITE.hours)}</p></div>
     </div>
     <p class="copy">© ${new Date().getFullYear()} ${SITE.name}. All rights reserved.</p></div></footer>
-  <a class="float-wa" href="${waLink('Hello Tissy Glams Studio, I have a question.')}" target="_blank" rel="noopener">Chat on WhatsApp</a>`;
+  <a class="float-wa" href="${waLink('Hello Fissy Glam Studio, I have a question.')}" target="_blank" rel="noopener">Chat on WhatsApp</a>`;
   const mb = $('.menu-btn'); mb.addEventListener('click', () => { const o = $('#nav').classList.toggle('open'); mb.setAttribute('aria-expanded', o); });
   updateBadge();
 
@@ -142,7 +142,7 @@
       const c = chosen(); $('#svc-err').hidden = c.length > 0;
       if (!validate(f) || !c.length) return;
       const t = c.reduce((n, s) => n + s.price, 0);
-      const msg = `Hello Tissy Glams Studio, I would like to book:\n\n*Services*\n${c.map(s => `- ${s.name} (${s.from ? 'from ' : ''}${fmt(s.price)})`).join('\n')}\n\n*Date:* ${niceDate($('#date').value)}\n*Time:* ${$('#time').value}\n*Where:* ${where() === 'home' ? 'Home/venue service - ' + $('#addr').value : 'At the studio'}\n*Occasion:* ${$('#occasion').value || 'Not stated'}\n*Estimated total:* ${fmt(t)}\n*Notes:* ${$('#notes').value || 'None'}\n\n*Name:* ${$('#name').value}\n*Phone:* ${$('#phone').value}`;
+      const msg = `Hello Fissy Glam Studio, I would like to book:\n\n*Services*\n${c.map(s => `- ${s.name} (${s.from ? 'from ' : ''}${fmt(s.price)})`).join('\n')}\n\n*Date:* ${niceDate($('#date').value)}\n*Time:* ${$('#time').value}\n*Where:* ${where() === 'home' ? 'Home/venue service - ' + $('#addr').value : 'At the studio'}\n*Occasion:* ${$('#occasion').value || 'Not stated'}\n*Estimated total:* ${fmt(t)}\n*Notes:* ${$('#notes').value || 'None'}\n\n*Name:* ${$('#name').value}\n*Phone:* ${$('#phone').value}`;
       sent($('#book-result'), msg, 'Your booking request is ready to send.'); f.hidden = true;
     });
   }
@@ -155,19 +155,19 @@
     f.addEventListener('submit', e => {
       e.preventDefault(); if (!validate(f)) return;
       const t = TRAINING.find(x => x.id === $('#course').value);
-      const msg = `Hello Tissy Glams Studio, I would like to enquire about training.\n\n*Class:* ${t.name} (${fmt(t.price)})\n*Experience:* ${$('#level').value}\n*Message:* ${$('#tmsg').value || 'None'}\n\n*Name:* ${$('#tname').value}\n*Phone:* ${$('#tphone').value}`;
+      const msg = `Hello Fissy Glam Studio, I would like to enquire about training.\n\n*Class:* ${t.name} (${fmt(t.price)})\n*Experience:* ${$('#level').value}\n*Message:* ${$('#tmsg').value || 'None'}\n\n*Name:* ${$('#tname').value}\n*Phone:* ${$('#tphone').value}`;
       sent($('#train-result'), msg, 'Your enquiry is ready to send.'); f.hidden = true;
     });
   }
 
   if (page === 'contact') {
     $('#c-addr').textContent = SITE.address; $('#c-hours').textContent = SITE.hours;
-    const cw = $('#c-wa'); cw.href = waLink('Hello Tissy Glams Studio'); cw.textContent = SITE.phoneDisplay;
+    const cw = $('#c-wa'); cw.href = waLink('Hello Fissy Glam Studio'); cw.textContent = SITE.phoneDisplay;
     const ci = $('#c-ig'); ci.href = 'https://instagram.com/' + SITE.instagram; ci.textContent = '@' + SITE.instagram;
     const f = $('#contact-form');
     f.addEventListener('submit', e => {
       e.preventDefault(); if (!validate(f)) return;
-      const msg = `Hello Tissy Glams Studio,\n\n${$('#cmsg').value}\n\n*Name:* ${$('#cname').value}\n*Phone:* ${$('#cphone').value}`;
+      const msg = `Hello Fissy Glam Studio,\n\n${$('#cmsg').value}\n\n*Name:* ${$('#cname').value}\n*Phone:* ${$('#cphone').value}`;
       sent($('#contact-result'), msg, 'Your message is ready to send.'); f.hidden = true;
     });
   }
@@ -201,7 +201,7 @@
     f.addEventListener('submit', e => {
       e.preventDefault(); if (!validate(f)) return;
       const ls = lines(), z = zone(), del = mode() === 'delivery', sub = ls.reduce((n, l) => n + l.p.price * l.qty, 0), fee = del ? z.fee : 0;
-      const msg = `Hello Tissy Glams Studio, I would like to place an order:\n\n${ls.map(l => `- ${l.qty} x ${l.p.name}${l.shade ? ' (' + l.shade + ')' : ''} = ${fmt(l.p.price * l.qty)}`).join('\n')}\n\n*Items:* ${fmt(sub)}\n*${del ? 'Delivery to ' + z.label : 'Pickup'}:* ${del ? (z.confirm ? 'fee to be confirmed' : fmt(fee)) : 'free'}\n*Total:* ${fmt(sub + fee)}${del && z.confirm ? ' + delivery' : ''}\n${del ? '*Address:* ' + $('#address').value + '\n' : ''}*Payment:* ${$('#pay').value}\n*Note:* ${$('#onote').value || 'None'}\n\n*Name:* ${$('#oname').value}\n*Phone:* ${$('#ophone').value}`;
+      const msg = `Hello Fissy Glam Studio, I would like to place an order:\n\n${ls.map(l => `- ${l.qty} x ${l.p.name}${l.shade ? ' (' + l.shade + ')' : ''} = ${fmt(l.p.price * l.qty)}`).join('\n')}\n\n*Items:* ${fmt(sub)}\n*${del ? 'Delivery to ' + z.label : 'Pickup'}:* ${del ? (z.confirm ? 'fee to be confirmed' : fmt(fee)) : 'free'}\n*Total:* ${fmt(sub + fee)}${del && z.confirm ? ' + delivery' : ''}\n${del ? '*Address:* ' + $('#address').value + '\n' : ''}*Payment:* ${$('#pay').value}\n*Note:* ${$('#onote').value || 'None'}\n\n*Name:* ${$('#oname').value}\n*Phone:* ${$('#ophone').value}`;
       sent($('#order-result'), msg, 'Your order is ready to send.');
       $('#checkout').hidden = true; setCart([]);
     });

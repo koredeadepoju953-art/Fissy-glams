@@ -1,12 +1,12 @@
 
 const SITE = {
-  name: 'Tissy Glams Studio',
+  name: 'Fissy Glam Studio',
   whatsapp: '2347089205758',          // international format, no + or spaces
   phoneDisplay: '2347089205758',
-  instagram: 'Tissyglams',            // handle without @
+  instagram: 'fissyglam',            // handle without @
   address: 'Isolu-Funis Junction, Alabata Road, Abeokuta, Ogun State',    // replace with the studio's full address
   hours: 'Monday to Saturday, 8am to 7pm',
-  bank: { bank: 'Bank name', number: '0000000000', holder: 'Tissy Glams Studio' },
+  bank: { bank: 'Bank name', number: '0000000000', holder: 'Fissy Glam Studio' },
   depositNote: 'A 50% deposit confirms your booking date.'
 };
 
@@ -36,7 +36,7 @@ const SERVICES = [
   },
   {
     group: 'Add-ons', intro: 'Added to any booking above.', items: [
-      { id: 'home', name: 'Home or venue service', desc: 'Tissy comes to you. Final fee depends on distance.', price: 15000, time: 'from', from: true },
+      { id: 'home', name: 'Home or venue service', desc: 'Fissy comes to you. Final fee depends on distance.', price: 15000, time: 'from', from: true },
       { id: 'lashes', name: 'Premium lashes', desc: 'Upgrade to mink-style strip lashes.', price: 3000, time: 'add-on' }
     ]
   }
